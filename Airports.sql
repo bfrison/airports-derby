@@ -1,0 +1,10 @@
+CREATE TABLE AIRPORTS (
+  CODE char(3) NOT NULL,
+  NAME varchar(127) NOT NULL,
+  CITY varchar(127) NOT NULL,
+  COUNTRY varchar(127) NOT NULL,
+  ELEVATION smallint NOT NULL,
+  LATITUDE smallint NOT NULL,
+  LONGITUDE smallint NOT NULL,
+  PRIMARY KEY (CODE)
+);
