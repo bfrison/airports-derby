@@ -1,0 +1,4 @@
+# airports-derby
+In this assignment, we were required to write an app, using Swing GUI and Derby database, where one must perform CRUD operations on a Derby database.
+The app was written in Java and the GUI uses Swing. The Derby database must be set up set up separately and the connection string added to the Datalayer.java file before compiling. Use the Airports.sql script to create the table in the database.
+Once the software is set up, airports data can be entered in the graphical interface and added to the database using "Add New." Airports can be modified using "Update" or deleted using "Delete." When an airport is selected, the app will find the nearest airport using "Find Nearest Airport" and display the distance. The algorithm for calculating distances was obtained from GeoDataSource.
