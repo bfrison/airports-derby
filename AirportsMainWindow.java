@@ -254,14 +254,14 @@ public class AirportsMainWindow extends javax.swing.JFrame {
         }
         Object[] options = {"Delete", "Cancel"};
         int choice = JOptionPane.showOptionDialog(this,
-                "Are you sure you want to delete item: " + item.name,
+                "Are you sure you want to delete item: " + item.getName(),
                 "Confirm item deletion",
                 JOptionPane.YES_NO_OPTION,
                 JOptionPane.QUESTION_MESSAGE,
                 null, options, options[0]);
         if (choice == 0) {
             try {
-                dl.deleteAirport(item.code);
+                dl.deleteAirport(item.getCode());
                 refreshAirportList();
             } catch (SQLException e) {
                 e.printStackTrace(System.out);
@@ -274,17 +274,18 @@ public class AirportsMainWindow extends javax.swing.JFrame {
     private void lstAirportListValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_lstAirportListValueChanged
         Airport item = lstAirportList.getSelectedValue();
         if (item != null) {
-            tfCode.setText(item.code);
-            tfName.setText(item.name);
-            tfCity.setText(item.city);
-            tfCountry.setText(item.country);
-            tfElevation.setText(Integer.toString(item.elevation));
-            tfLatitude.setText(Double.toString(item.latitude));
-            tfLongitude.setText(Double.toString(item.longitude));
+            tfCode.setText(item.getCode());
+            tfName.setText(item.getName());
+            tfCity.setText(item.getCity());
+            tfCountry.setText(item.getCountry());
+            tfElevation.setText(Integer.toString(item.getElevation()));
+            tfLatitude.setText(Double.toString(item.getLatitude()));
+            tfLongitude.setText(Double.toString(item.getLongitude()));
         }
     }//GEN-LAST:event_lstAirportListValueChanged
 
     private void btUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btUpdateActionPerformed
+        Airport airport = lstAirportList.getSelectedValue();
         Airport item;
         String code = tfCode.getText();
         String name = tfName.getText();
@@ -296,7 +297,7 @@ public class AirportsMainWindow extends javax.swing.JFrame {
         try {
             item = new Airport(code, name, city, country, Integer.parseInt(elevation),
                     Double.parseDouble(latitude), Double.parseDouble(longitude));
-            dl.updateAirport(item);
+            dl.updateAirport(item, airport.getCode());
             refreshAirportList();
         } catch (SQLException e) {
             e.printStackTrace(System.out);

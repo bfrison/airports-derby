@@ -37,8 +37,8 @@ public class DataLayer {
         }
     }
 
-    void updateAirport(Airport airport) throws SQLException {
-        try (PreparedStatement ps = airport.toUpdatestmt(conn)) {
+    void updateAirport(Airport airport, String pk) throws SQLException {
+        try (PreparedStatement ps = airport.toUpdatestmt(conn, pk)) {
             ps.execute();
         }
     }

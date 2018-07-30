@@ -4,15 +4,13 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.List;
 import javax.swing.DefaultListModel;
 
 public class Airport {
 
-    String code, name, city, country;
-    int elevation;
-    double latitude, longitude;
+    private String code, name, city, country;
+    private int elevation;
+    private double latitude, longitude;
 
     public Airport(String code, String name, String city, String country,
         int elevation, double latitude, double longitude) {
@@ -73,8 +71,9 @@ public class Airport {
         return ps;
     }
 
-    PreparedStatement toUpdatestmt(Connection conn) throws SQLException {
+    PreparedStatement toUpdatestmt(Connection conn, String pk) throws SQLException {
         String query = "UPDATE airports SET "
+            + "code = ?,"    
             + "name = ?,"
             + "city = ?,"
             + "country = ?,"
@@ -83,13 +82,14 @@ public class Airport {
             + "longitude = ? "
             + "WHERE code = ?";
         PreparedStatement ps = conn.prepareStatement(query);
-        ps.setString(1, this.name);
-        ps.setString(2, this.city);
-        ps.setString(3, this.country);
-        ps.setInt(4, this.elevation);
-        ps.setDouble(5, this.latitude);
-        ps.setDouble(6, this.longitude);
-        ps.setString(7, this.code);
+        ps.setString(1, this.code);
+        ps.setString(2, this.name);
+        ps.setString(3, this.city);
+        ps.setString(4, this.country);
+        ps.setInt(5, this.elevation);
+        ps.setDouble(6, this.latitude);
+        ps.setDouble(7, this.longitude);
+        ps.setString(8, pk);
         return ps;
     }
 
@@ -119,5 +119,33 @@ public class Airport {
     @Override
     public String toString() {
         return String.format("%s - %s in %s, %s", code, name, city, country);
+    }
+
+    public String getCode() {
+        return code;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public String getCity() {
+        return city;
+    }
+
+    public String getCountry() {
+        return country;
+    }
+
+    public int getElevation() {
+        return elevation;
+    }
+
+    public double getLatitude() {
+        return latitude;
+    }
+
+    public double getLongitude() {
+        return longitude;
     }
 }
